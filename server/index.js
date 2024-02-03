@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 5000;
@@ -10,6 +11,13 @@ const clientOptions = {
 };
 
 const authRoute = require('./routes/auth');
+const votesRoute = require('./routes/votes');
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+);
 
 app.use(express.json());
 
@@ -24,8 +32,10 @@ async function connectToDB() {
     console.log(err);
   }
 }
+
 connectToDB();
 
 app.use('/api/user', authRoute);
+app.use('/api/votes', votesRoute);
 
 app.listen(PORT, () => console.log(`Server is listening at PORT : ${PORT}`));
