@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 
+.input {
+    @apply bg-gray-200 ring-1 ring-green-300;
+}

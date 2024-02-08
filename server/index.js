@@ -12,12 +12,9 @@ const clientOptions = {
 
 const authRoute = require('./routes/auth');
 const votesRoute = require('./routes/votes');
+const pollsRoute = require('./routes/poll');
 
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-  })
-);
+app.use(cors());
 
 app.use(express.json());
 
@@ -37,5 +34,6 @@ connectToDB();
 
 app.use('/api/user', authRoute);
 app.use('/api/votes', votesRoute);
+app.use('/api/polls', pollsRoute);
 
 app.listen(PORT, () => console.log(`Server is listening at PORT : ${PORT}`));
